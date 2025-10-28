@@ -1,0 +1,26 @@
+name: Code Review
+
+on:
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+    
+    - name: Check syntax
+      run: |
+        node -c run.js
+        find . -name "*.js" -not -path "./node_modules/*" -exec node -c {} \;
+    
+    - name: Check for large files
+      run: |
+        find . -name "*.js" -not -path "./node_modules/*" -size +100k | wc -l | awk '{if($1>0) exit 1}'

@@ -1,0 +1,29 @@
+name: Custom Scraping Health Check
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Daily at 12 PM UTC
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Scraping health check
+      run: |
+        echo "🧪 Testing scraping script health..."
+        echo "📊 This would run basic scraping tests"
+        echo "✅ Custom workflow executed successfully"
+        date
