@@ -23,4 +23,4 @@ jobs:
         npm outdated || echo "Some packages are outdated"
         
     - name: Security audit
-      run: npm audit || echo "Vulnerabilities found — logged for review"
+      run: npm audit --audit-level moderate || echo "Vulnerabilities found — review required"
