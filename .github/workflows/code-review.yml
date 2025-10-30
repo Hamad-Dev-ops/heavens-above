@@ -3,6 +3,7 @@ name: Code Review
 on:
   pull_request:
     branches: [ main, master ]
+  workflow_dispatch:  # Add this line for manual triggers
 
 jobs:
   review:
